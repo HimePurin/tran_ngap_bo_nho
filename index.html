@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tmai needs the remedy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #FFC0CB, #FF69B4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            color: white;
+            overflow: hidden;
+        }
+
+        button {
+            font-family: 'Great Vibes', cursive;
+            font-size: 32px;
+            padding: 15px 30px;
+            border: 2px solid white;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+            color: #FF69B4;
+            transform: scale(1.1);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .popup {
+            position: absolute;
+            width: 320px;
+            height: 160px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #FF69B4;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Great Vibes', cursive;
+            font-size: 24px;
+            color: #FF69B4;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s ease, float 3s infinite ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <button id="mainButton">Em muốn nói là...</button>
+
+    <script>
+        function createPopup() {
+            const popup = document.createElement("div");
+            popup.className = "popup";
+            popup.innerHTML = "Nhớ nhớ nhớ anh!!!";
+
+            const x = Math.random() * (window.innerWidth - 320);
+            const y = Math.random() * (window.innerHeight - 160);
+
+            popup.style.left = `${x}px`;
+            popup.style.top = `${y}px`;
+            popup.style.position = "absolute";
+
+            document.body.appendChild(popup);
+
+            setTimeout(() => {
+                popup.remove();
+            }, 3000);
+        }
+
+        function createMultiplePopups(count = 50, delay = 200) {
+            let created = 0;
+
+            const interval = setInterval(() => {
+                if (created >= count) {
+                    clearInterval(interval);
+                    return;
+                }
+                createPopup();
+                created++;
+            }, delay);
+        }
+
+        document.getElementById("mainButton").addEventListener("click", () => {
+            createMultiplePopups();
+        });
+    </script>
+</body>
+</html>
